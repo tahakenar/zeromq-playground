@@ -8,8 +8,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-find_package(cppzmq)
-find_package(spdlog)
+find_package(cppzmq CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 add_library(zeromq_logger INTERFACE)
 target_include_directories(zeromq_logger INTERFACE
@@ -23,9 +23,3 @@ add_subdirectory(patterns/request-reply)
 
 add_executable(main src/main.cpp)
 target_link_libraries(main cppzmq)
-
-add_executable(server src/server.cpp)
-target_link_libraries(server cppzmq zeromq_logger)
-
-add_executable(client src/client.cpp)
-target_link_libraries(client cppzmq zeromq_logger)
