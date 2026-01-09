@@ -8,10 +8,11 @@ repos:
       - id: clang-tidy
         args:
           - -p=build
-      # - id: cppcheck
-      #   args:
-      #     - --enable=all
-      #     - --inconclusive
-      #     - --project=build/compile_commands.json
-      #     - --suppress=missingIncludeSystem
-      
+      - id: cppcheck
+        args:
+          - --enable=all
+          - --inconclusive
+          - --project=build/compile_commands.json
+          - --suppress=missingIncludeSystem
+        pass_filenames: false
+        files: \.(c|cc|cpp|cxx|h|hpp|hxx)$
