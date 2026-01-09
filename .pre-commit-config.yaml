@@ -8,4 +8,10 @@ repos:
       - id: clang-tidy
         args:
           - -p=build
-
+      # - id: cppcheck
+      #   args:
+      #     - --enable=all
+      #     - --inconclusive
+      #     - --project=build/compile_commands.json
+      #     - --suppress=missingIncludeSystem
+      
