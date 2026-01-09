@@ -36,3 +36,9 @@ jobs:
         run: |
           pip install pre-commit
           pre-commit run --all-files
+
+      # Runs seperately due to compilation database / file issue
+      - name: Run cpp check 
+        run: |
+          cppcheck --enable=all --inconclusive --project=build/compile_commands.json \
+          --suppress=missingIncludeSystem --error-exitcode=1
