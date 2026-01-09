@@ -16,6 +16,9 @@ Rep::Rep(const std::string &addr)
 
 void Rep::start() {
   while (true) {
+    // unused variable to test static check pipeline
+    int a{3};
+
     zmq::message_t request;
     //  Wait for next request from client
     auto result = socket_.recv(request, zmq::recv_flags::none);
