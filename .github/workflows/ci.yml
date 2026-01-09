@@ -1,13 +1,14 @@
-name: Static Analysis
+name: Build & Static Analysis
 on:
   push:
     branches: "**"
   pull_request:
     branches: [master]
+    types: [closed]
 
 jobs:
-  static-checks:
-    name: Run Static Analysis
+  build-and-static-check:
+    name: Build & Static Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,6 +27,8 @@ jobs:
           cmake -B build -S . \
             -DCMAKE_TOOLCHAIN_FILE=$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake \
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      - name: Build
+        run: cmake --build build
       
       - name: Set up Python
         uses: actions/setup-python@v4
