@@ -9,8 +9,8 @@ This project is designed as a practice project as well as a boilerplate code for
 
 Toolchain I use:
 
-- **Compiler:** Apple clang version 16.0.0
-- **Build System:** CMake 4.0.3
+- **Compiler:** clang version 18.1.3
+- **Build System:** CMake 4.2.1
 - **Dependency Management:** [vcpkg](https://github.com/Microsoft/vcpkg)
 
 **CMake** and **vcpkg** are prerequisities to fetch dependencies and build the project.
@@ -18,6 +18,7 @@ Toolchain I use:
 #### Dependencies:
 - [cppzmq](https://github.com/zeromq/cppzmq)
 - [spdlog](https://github.com/gabime/spdlog)
+- [protobuf](https://protobuf.dev)
 
 In order to get dependencies and build, below commands shall be executed:
 

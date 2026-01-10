@@ -2,6 +2,7 @@
 
 #include <unistd.h>
 
+#include "payload.pb.h"
 #include "zeromq_logger.hpp"
 
 Rep::Rep(const std::string &addr)
@@ -17,19 +18,33 @@ Rep::Rep(const std::string &addr)
 void Rep::start() {
   while (true) {
     zmq::message_t request;
-    //  Wait for next request from client
     auto result = socket_.recv(request, zmq::recv_flags::none);
-    assert(result.value_or(0) != 0);  // Check if bytes received is non-zero
 
-    logger_->info("Received Hello");
+    if (result.value_or(0) != 0) {
+      auto payload_as_str = request.to_string();
 
-    //  Pretend to do some 'work'
-    sleep(1);
+      Payload payload;
+      payload.ParseFromString(payload_as_str.data());
 
-    //  Send reply back to client
-    constexpr std::string_view kReplyString = "World";
-    zmq::message_t reply(kReplyString.length());
-    memcpy(reply.data(), kReplyString.data(), kReplyString.length());
-    socket_.send(reply, zmq::send_flags::none);
+      logger_->info(std::format(
+          "REQ received. name: {}, id: {}, left operand: {}, right operand: {}",
+          payload.name(), payload.payload_id(), payload.left_operand(),
+          payload.right_operand()));
+
+      // Do operation
+      sleep(1);
+      PayloadResponse response;
+      response.set_name(payload.name());
+      response.set_payload_id(payload.payload_id());
+      response.set_solution(payload.left_operand() + payload.right_operand());
+
+      std::string buffer;
+      if (!response.SerializeToString(&buffer)) {
+        throw std::runtime_error("Failed to serialize payload");
+      }
+      zmq::message_t request(buffer.size());
+      memcpy(request.data(), buffer.data(), buffer.size());
+      socket_.send(request, zmq::send_flags::none);
+    }
   }
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <memory>
 #include <zmq.hpp>
 
 #include "zeromq_logger.hpp"
@@ -14,5 +13,5 @@ class Rep {
   std::string bind_addr_;
   zmq::context_t context_;
   zmq::socket_t socket_;
-  std::shared_ptr<spdlog::logger> logger_;
+  util::logger_ptr logger_;
 };

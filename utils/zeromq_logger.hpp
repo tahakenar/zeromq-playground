@@ -39,8 +39,10 @@ constexpr const char *to_ansi(LoggerColor color) {
   return "\033[0m";
 }
 
-inline std::shared_ptr<spdlog::logger> get_logger(const std::string &name,
-                                                  LoggerColor color) {
+using logger_ptr = std::shared_ptr<spdlog::logger>;
+
+// cppcheck-suppress unusedFunction
+inline logger_ptr get_logger(const std::string &name, LoggerColor color) {
   if (auto existing = spdlog::get(name)) {
     return existing;
   }
