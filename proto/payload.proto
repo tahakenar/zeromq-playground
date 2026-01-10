@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-// Hypotetically desired operation is:
+// The desired operation is:
 // left_operand + right_operand = solution
-// Assume operation shall be taken place in a different process
+// Assume the operation will take place in a different process.
 
 message Payload {
   string name = 1;
