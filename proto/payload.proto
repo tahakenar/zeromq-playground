@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// Hypotetically desired operation is:
+// left_operand + right_operand = solution
+// Assume operation shall be taken place in a different process
+
+message Payload {
+  string name = 1;
+  int32 payload_id = 2;
+  int32 left_operand = 3;
+  int32 right_operand = 4;
+}
+
+message PayloadResponse {
+    string name = 1;
+    int32 payload_id = 2;
+    int32 solution = 3;
+}

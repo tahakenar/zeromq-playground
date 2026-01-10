@@ -22,6 +22,7 @@ target_link_libraries(zeromq_logger INTERFACE
 )
 
 add_subdirectory(patterns/request-reply)
+add_subdirectory(proto)
 
 add_executable(main src/main.cpp)
 target_link_libraries(main cppzmq)
