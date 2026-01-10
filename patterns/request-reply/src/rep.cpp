@@ -1,6 +1,7 @@
 #include "rep.hpp"
 
-#include <unistd.h>
+#include <chrono>
+#include <thread>
 
 #include "payload.pb.h"
 #include "zeromq_logger.hpp"
@@ -32,7 +33,7 @@ void Rep::start() {
           payload.right_operand()));
 
       // Do operation
-      sleep(1);
+      std::this_thread::sleep_for(std::chrono::milliseconds(200));
       PayloadResponse response;
       response.set_name(payload.name());
       response.set_payload_id(payload.payload_id());

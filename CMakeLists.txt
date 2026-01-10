@@ -14,16 +14,19 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 find_package(cppzmq CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-add_library(zeromq_logger INTERFACE)
-target_include_directories(zeromq_logger INTERFACE
+add_subdirectory(proto)
+
+add_library(utils INTERFACE)
+target_include_directories(utils INTERFACE
 ${CMAKE_CURRENT_SOURCE_DIR}/utils
 )
-target_link_libraries(zeromq_logger INTERFACE
+target_link_libraries(utils INTERFACE
 spdlog::spdlog
+proto_messages
 )
 
-add_subdirectory(proto)
 add_subdirectory(patterns/request-reply)
+
 
 add_executable(main src/main.cpp)
 target_link_libraries(main cppzmq)
