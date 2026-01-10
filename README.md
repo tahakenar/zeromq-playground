@@ -18,6 +18,7 @@ Toolchain I use:
 #### Dependencies:
 - [cppzmq](https://github.com/zeromq/cppzmq)
 - [spdlog](https://github.com/gabime/spdlog)
+- [protobuf](https://protobuf.dev)
 
 In order to get dependencies and build, below commands shall be executed:
 
