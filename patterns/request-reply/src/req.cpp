@@ -19,8 +19,8 @@ Req::Req(const std::string& addr)
 
 void Req::sendString(const std::string& msg) {
   zmq::message_t request(msg.size());
-  memcpy(request.data(), &msg, msg.size());
-  logger_->info(std::format("Sending message: {}", msg));
+  memcpy(request.data(), msg.data(), msg.size());
+  logger_->info(std::format("Sending REQ payload: {}", msg));
   socket_.send(request, zmq::send_flags::none);
 }
 
@@ -28,6 +28,7 @@ void Req::getReply() {
   zmq::message_t reply;
   auto res = socket_.recv(reply, zmq::recv_flags::none);
   if (res.has_value()) {
-    logger_->info(std::format("Received bytes: {}", res.value()));
+    auto reply_payload = reply.to_string_view();
+    logger_->info(std::format("REP payload received: {}", reply_payload));
   }
 }

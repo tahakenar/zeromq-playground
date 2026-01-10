@@ -17,19 +17,20 @@ Rep::Rep(const std::string &addr)
 void Rep::start() {
   while (true) {
     zmq::message_t request;
-    //  Wait for next request from client
     auto result = socket_.recv(request, zmq::recv_flags::none);
-    assert(result.value_or(0) != 0);  // Check if bytes received is non-zero
 
-    logger_->info("Received Hello");
+    if (result.value_or(0) != 0) {
+      auto payload = request.to_string_view();
+      logger_->info(std::format("REQ payload received: {}", payload));
+    }
 
     //  Pretend to do some 'work'
     sleep(1);
 
-    //  Send reply back to client
     constexpr std::string_view kReplyString = "World";
     zmq::message_t reply(kReplyString.length());
     memcpy(reply.data(), kReplyString.data(), kReplyString.length());
+    logger_->info(std::format("Sending REP payload: {}", kReplyString));
     socket_.send(reply, zmq::send_flags::none);
   }
 }
