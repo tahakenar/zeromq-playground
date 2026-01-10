@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.0)
+cmake_minimum_required(VERSION 3.30)
 project(zeromq-playground)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -22,7 +22,7 @@ target_link_libraries(zeromq_logger INTERFACE
 )
 
 add_subdirectory(patterns/request-reply)
-add_subdirectory(proto)
+# add_subdirectory(proto)
 
 add_executable(main src/main.cpp)
 target_link_libraries(main cppzmq)
