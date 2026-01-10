@@ -1,6 +1,7 @@
 #pragma once
 
 #include <zmq.hpp>
+
 #include "zeromq_logger.hpp"
 
 class Rep {

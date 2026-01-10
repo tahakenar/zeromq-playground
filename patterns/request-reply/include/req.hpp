@@ -1,13 +1,15 @@
 #pragma once
 
 #include <zmq.hpp>
+
+#include "payload.pb.h"
 #include "zeromq_logger.hpp"
 
 class Req {
  public:
   explicit Req(const std::string& addr);
-  void sendString(const std::string& msg);
-  void getReply();
+  void sendPayload(const Payload& payload);
+  void getPayloadResponse();
 
  private:
   std::string connection_addr_;
