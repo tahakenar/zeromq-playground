@@ -1,6 +1,6 @@
 {
   "dependencies": [
     "spdlog",
-    "cppzmq",
+    "cppzmq"
   ]
 }
