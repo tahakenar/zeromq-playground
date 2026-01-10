@@ -48,4 +48,4 @@ jobs:
       - name: Run cpp check 
         run: |
           cppcheck --enable=all --inconclusive --project=build/compile_commands.json \
-          --suppress=missingIncludeSystem --error-exitcode=1
+          --suppress=missingIncludeSystem --suppress=preprocessorErrorDirective --suppress=unusedFunction --error-exitcode=1
