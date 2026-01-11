@@ -10,19 +10,9 @@ add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-
 find_package(cppzmq CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
 add_subdirectory(proto)
-
-add_library(utils INTERFACE)
-target_include_directories(utils INTERFACE
-${CMAKE_CURRENT_SOURCE_DIR}/utils
-)
-target_link_libraries(utils INTERFACE
-spdlog::spdlog
-proto_messages
-)
-
+add_subdirectory(utils)
 add_subdirectory(patterns/request-reply)
