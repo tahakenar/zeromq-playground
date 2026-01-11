@@ -28,17 +28,17 @@ void Req::sendPayload(const Payload &payload) {
   socket_.send(request, zmq::send_flags::none);
 }
 
-void Req::getPayloadResponse() {
+void Req::getPayloadSolution() {
   zmq::message_t reply;
   auto res = socket_.recv(reply, zmq::recv_flags::none);
   if (res.has_value()) {
     auto payload_res_as_str = reply.to_string();
-    PayloadResponse payload_response;
-    if (!payload_response.ParseFromString(payload_res_as_str)) {
+    PayloadSolution payload_solution;
+    if (!payload_solution.ParseFromString(payload_res_as_str)) {
       throw std::runtime_error("Failed to parse payload response");
     }
     logger_->info(std::format(
-        "REP received. name: {}, id: {}, solution: {}", payload_response.name(),
-        payload_response.payload_id(), payload_response.solution()));
+        "REP received. name: {}, id: {}, solution: {}", payload_solution.name(),
+        payload_solution.payload_id(), payload_solution.solution()));
   }
 }
