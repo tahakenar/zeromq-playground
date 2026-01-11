@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <zmq.hpp>
 
 #include "payload.pb.h"
@@ -15,4 +16,8 @@ class Rep {
   zmq::context_t context_;
   zmq::socket_t socket_;
   util::logger_ptr logger_;
+
+  std::optional<Payload> receivePayload();
+  PayloadSolution getSolution(const Payload& payload);
+  void sendPayloadSolution(const PayloadSolution& solution);
 };

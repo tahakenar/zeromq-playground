@@ -9,7 +9,7 @@ class Req {
  public:
   explicit Req(const std::string& addr);
   void sendPayload(const Payload& payload);
-  void getPayloadResponse();
+  void getPayloadSolution();
 
  private:
   std::string connection_addr_;

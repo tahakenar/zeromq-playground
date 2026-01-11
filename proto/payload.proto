@@ -11,7 +11,7 @@ message Payload {
   int32 right_operand = 4;
 }
 
-message PayloadResponse {
+message PayloadSolution {
     string name = 1;
     int32 payload_id = 2;
     int32 solution = 3;

@@ -8,6 +8,6 @@ int main() {
   for (int i = 0; i < 10; i++) {
     auto payload = util::get_random_payload();
     req.sendPayload(payload);
-    req.getPayloadResponse();
+    req.getPayloadSolution();
   }
 }
