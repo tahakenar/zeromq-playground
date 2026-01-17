@@ -1,0 +1,28 @@
+#include "pub.hpp"
+
+#include <unistd.h>
+
+#include <format>
+
+Pub::Pub(const std::string &addr)
+    : bind_addr_(addr),
+      context_(1),
+      socket_(context_, zmq::socket_type::pub),
+      logger_(util::get_logger(std::format("PUB with pid: {}", getpid()),
+                               util::LoggerColor::Blue)) {
+  logger_->info(std::format("Initialized for address {}", bind_addr_));
+  socket_.bind(bind_addr_);
+}
+
+void Pub::publishPayload(const Payload &payload) {
+  logger_->info(std::format("Publishing payload. name: {}, id: {}",
+                            payload.name(), payload.payload_id()));
+
+  std::string buffer;
+  if (!payload.SerializeToString(&buffer)) {
+    throw std::runtime_error("Failed to serialize payload");
+  }
+  zmq::message_t request(buffer.size());
+  memcpy(request.data(), buffer.data(), buffer.size());
+  socket_.send(request, zmq::send_flags::none);
+}
