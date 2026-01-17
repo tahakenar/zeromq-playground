@@ -1,7 +1,7 @@
 #include <thread>
 
 #include "pub.hpp"
-#include "random_payload.hpp"
+#include "random_generator.hpp"
 
 int main() {
   Pub pub{"tcp://*:5568"};

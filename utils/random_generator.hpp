@@ -29,4 +29,13 @@ inline Payload get_random_payload() {
   return payload;
 }
 
+inline int get_random_integer(int lower_bound = 1, int upper_bound = 10) {
+  static std::random_device rd;
+  static std::mt19937 gen(rd());
+
+  std::uniform_int_distribution<std::size_t> int_dist(lower_bound, upper_bound);
+
+  return int_dist(gen);
+}
+
 }  // namespace util

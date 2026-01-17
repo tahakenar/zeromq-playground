@@ -1,5 +1,5 @@
 #include "payload.pb.h"
-#include "random_payload.hpp"
+#include "random_generator.hpp"
 #include "req.hpp"
 
 int main() {
