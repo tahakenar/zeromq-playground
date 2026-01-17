@@ -2,6 +2,8 @@
 
 #include <unistd.h>
 
+#include <format>
+
 Pub::Pub(const std::string &addr)
     : bind_addr_(addr),
       context_(1),
@@ -13,6 +15,9 @@ Pub::Pub(const std::string &addr)
 }
 
 void Pub::publishPayload(const Payload &payload) {
+  logger_->info(std::format("Publishing payload. name: {}, id: {}",
+                            payload.name(), payload.payload_id()));
+
   std::string buffer;
   if (!payload.SerializeToString(&buffer)) {
     throw std::runtime_error("Failed to serialize payload");

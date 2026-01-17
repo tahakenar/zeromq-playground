@@ -19,9 +19,9 @@ void Sub::subscribe() {
     if (payload.has_value()) {
       auto solution = getSolution(payload.value());
 
-      logger_->info(std::format("Solution for name: {}, id: {} is: {}",
-                                solution.name(), solution.payload_id(),
-                                solution.solution()));
+      logger_->info(std::format(
+          "Payload solution for name: {}, id: {} is calculated as: {}",
+          solution.name(), solution.payload_id(), solution.solution()));
     }
   }
 }
