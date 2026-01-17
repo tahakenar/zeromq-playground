@@ -13,3 +13,4 @@ $REQ_BIN
 
 echo "Client finished. Shutting down REP server (PID: $REP_PID)"
 kill $REP_PID
+wait $REP_PID 2>/dev/null
