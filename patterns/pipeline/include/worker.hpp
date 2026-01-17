@@ -6,6 +6,6 @@
 #include "zeromq_logger.hpp"
 
 class Worker {
-    public:
-    private:
+ public:
+ private:
 };

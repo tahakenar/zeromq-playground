@@ -6,6 +6,6 @@
 #include "zeromq_logger.hpp"
 
 class Sink {
-    public:
-    private:
+ public:
+ private:
 };
