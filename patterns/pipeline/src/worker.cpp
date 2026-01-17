@@ -14,8 +14,7 @@ Worker::Worker(const std::string &pull_addr, const std::string &push_addr)
       push_socket_(context_, zmq::socket_type::push),
       logger_(util::get_logger(
           std::format("WORKER with pid: {}", getpid()),
-          util::LoggerColor(util::get_random_integer(
-              0, static_cast<int>(util::LoggerColor::Magenta))))) {
+          util::LoggerColor::Magenta)) {
   pull_socket_.connect(pull_addr);
   push_socket_.connect(push_addr);
   logger_->info(std::format("Initialized"));
