@@ -4,7 +4,7 @@
 
 Pub::Pub(const std::string &addr)
     : bind_addr_(addr),
-      context_(2),
+      context_(1),
       socket_(context_, zmq::socket_type::pub),
       logger_(util::get_logger(std::format("PUB with pid: {}", getpid()),
                                util::LoggerColor::Blue)) {

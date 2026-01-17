@@ -1,3 +1,6 @@
 #include "sub.hpp"
 
-int main() { [[maybe_unused]] Sub sub; }
+int main() {
+  Sub sub{"tcp://localhost:5568"};
+  sub.subscribe();
+}
